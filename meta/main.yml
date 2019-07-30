@@ -1,0 +1,4 @@
+dependencies:
+  - role: isset.package
+    package_name: ufw
+    package_state: "{{ isset_ufw_package_state }}"

@@ -1,0 +1,10 @@
+image: hyperized/yaml-linter:latest
+
+stages:
+  - yaml
+
+# If this does not passes, don't bother even trying Ansible :)
+yaml_lint:
+  stage: yaml
+  script:
+    - yaml-lint -i -q .
