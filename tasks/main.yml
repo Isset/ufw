@@ -5,6 +5,16 @@
     dest: "/etc/ufw/applications.d/{{ item.name | lower }}"
   loop: "{{ isset_ufw_applications }}"
 
+- name: ensure ufw app rules
+  ufw:
+    rule: allow
+    app: "{{ item.0.name }}"
+    src: "{{ item.1 }}"
+  with_subelements:
+    - "{{ isset_ufw_applications }}"
+    - sources
+# Notify 'ufw app reload app?'
+
 - name: ensure ufw rules
   ufw:
     rule: "{{ item.rule }}"
