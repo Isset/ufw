@@ -3,7 +3,7 @@
   template:
     src: app.profile
     dest: "/etc/ufw/applications.d/{{ item.name | lower }}"
-  loop: isset_ufw_applications
+  loop: "{{ isset_ufw_applications }}"
 
 - name: ensure ufw rules
   ufw:
@@ -11,7 +11,7 @@
     proto: "{{ item.proto | default(isset_ufw_default_protocol) }}"
     name: "{{ item.name | default(omit) }}"
     src: "{{ item.src | default(omit) }}"
-  loop: isset_ufw_rules
+  loop: "{{ isset_ufw_rules }}"
 
 - name: ensure firewall state
   ufw:
