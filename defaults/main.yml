@@ -1,5 +1,5 @@
 ---
 isset_ufw_package_state: present
 isset_ufw_firewall_state: enabled
-isset_ufw_rules:
-isset_ufw_applications:
+isset_ufw_rules: []
+isset_ufw_applications: []
