@@ -18,14 +18,14 @@ Role Variables
         port: 8080
         src: office.isset.net
     isset_ufw_applications:
-        - name: Grafana
-          title: Grafana
-          description: Dashboard and graph generator
-          ports:
-            - 3000/tcp
-          sources:
-            - 127.0.0.1
-            - "{{ lookup('dig', 'office.isset.net') }}"
+      - name: Grafana
+        title: Grafana
+        description: Dashboard and graph generator
+        ports:
+          - 3000/tcp
+        sources:
+          - 127.0.0.1
+          - "{{ lookup('dig', 'office.isset.net') }}"
           
 Dependencies
 ------------
