@@ -13,17 +13,19 @@ Role Variables
 
     isset_ufw_package_state: present
     isset_ufw_firewall_state: enabled
-    isset_ufw_default_protocol: any
     isset_ufw_rules:
       - rule: allow
-        app: CAdvisor
+        port: 8080
         src: office.isset.net
     isset_ufw_applications:
-      - name: CAdvisor
-        title: Google Cgroups Advisor
-        description: Tracks Cgroups containers and system resources
-        ports:
-          - 8080/tcp
+        - name: Grafana
+          title: Grafana
+          description: Dashboard and graph generator
+          ports:
+            - 3000/tcp
+          sources:
+            - 127.0.0.1
+            - "{{ lookup('dig', 'office.isset.net') }}"
           
 Dependencies
 ------------
