@@ -1,10 +1,9 @@
 ---
 isset_ufw_package_state: present
 isset_ufw_firewall_state: enabled
-isset_ufw_default_protocol: any
 isset_ufw_rules:
   - rule: allow
-    name: CAdvisor
+    app: CAdvisor
     src: office.isset.net
     port: 8080
 isset_ufw_applications:

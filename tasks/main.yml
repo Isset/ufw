@@ -8,8 +8,8 @@
 - name: ensure ufw rules
   ufw:
     rule: "{{ item.rule }}"
-    proto: "{{ item.proto | default(isset_ufw_default_protocol) }}"
-    name: "{{ item.name | default(omit) }}"
+    proto: "{{ item.proto | default(omit) }}"
+    app: "{{ item.app | default(omit) }}"
     src: "{{ item.src | default(omit) }}"
   loop: "{{ isset_ufw_rules }}"
 

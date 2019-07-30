@@ -16,9 +16,8 @@ Role Variables
     isset_ufw_default_protocol: any
     isset_ufw_rules:
       - rule: allow
-        name: CAdvisor
+        app: CAdvisor
         src: office.isset.net
-        port: 8080
     isset_ufw_applications:
       - name: CAdvisor
         title: Google Cgroups Advisor
