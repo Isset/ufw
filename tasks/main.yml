@@ -31,10 +31,6 @@
     src: "{{ item.src | default(omit) }}"
   loop: "{{ isset_ufw_rules }}"
 
-- name: ensure logging status
-  ufw:
-    log: "{{ isset_ufw_log }}"
-
 - name: ensure default inbound
   ufw:
     direction: incoming
@@ -45,6 +41,7 @@
     direction: outgoing
     policy: "{{ isset_ufw_outbound_default }}"
 
-- name: ensure firewall state
+- name: ensure firewall state and logging
   ufw:
+    log: "{{ isset_ufw_log }}"
     state: "{{ isset_ufw_firewall_state }}"
