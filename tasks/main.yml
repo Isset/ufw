@@ -8,6 +8,7 @@
 - name: ensure inbound ufw app rules
   ufw:
     rule: allow
+    direction: incoming
     app: "{{ source.0.name }}"
     src: "{{ source.1 }}"
   loop: "{{ lookup('subelements', isset_ufw_applications, 'sources', {'skip_missing': True}) }}"
@@ -17,6 +18,7 @@
 - name: ensure outbound ufw app rules
   ufw:
     rule: allow
+    direction: outgoing
     app: "{{ target.0.name }}"
     to: "{{ target.1 }}"
   loop: "{{ lookup('subelements', isset_ufw_applications, 'targets', {'skip_missing': True}) }}"
