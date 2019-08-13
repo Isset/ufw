@@ -10,11 +10,10 @@
     rule: allow
     app: "{{ source.0.name }}"
     src: "{{ source.1 }}"
-  loop: "{{ isset_ufw_applications | subelements('sources') }}"
+  loop: "{{ isset_ufw_applications | subelements('sources') | default([]) }}"
   loop_control:
     loop_var: source
   when:
-    - isset_ufw_applications is iterable
     - source is iterable
     - source.0 is mapping
     - source.0 is defined
@@ -24,11 +23,10 @@
     rule: allow
     app: "{{ target.0.name }}"
     to: "{{ target.1 }}"
-  loop: "{{ isset_ufw_applications | subelements('targets') }}"
+  loop: "{{ isset_ufw_applications | subelements('targets') | default([]) }}"
   loop_control:
     loop_var: target
   when:
-    - isset_ufw_applications is iterable
     - target is iterable
     - target.0 is mapping
     - target.0 is defined
