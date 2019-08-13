@@ -10,14 +10,14 @@
     rule: allow
     app: "{{ source.0.name }}"
     src: "{{ source.1 }}"
-  loop: "{{ lookup('subelements', isset_ufw_applications, 'sources', {'skip_missing: True}) }}"
+  loop: "{{ lookup('subelements', isset_ufw_applications, 'sources', {'skip_missing': True}) }}"
 
 - name: ensure outbound ufw app rules
   ufw:
     rule: allow
     app: "{{ target.0.name }}"
     to: "{{ target.1 }}"
-  loop: "{{ lookup('subelements', isset_ufw_applications, 'targets', {'skip_missing: True}) }}"
+  loop: "{{ lookup('subelements', isset_ufw_applications, 'targets', {'skip_missing': True}) }}"
 
 - name: ensure ufw rules
   ufw:
