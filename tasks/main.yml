@@ -10,26 +10,14 @@
     rule: allow
     app: "{{ source.0.name }}"
     src: "{{ source.1 }}"
-  loop: "{{ isset_ufw_applications | subelements('sources') | default([]) }}"
-  loop_control:
-    loop_var: source
-  when:
-    - source is iterable
-    - source.0 is mapping
-    - source.0 is defined
+  loop: "{{ lookup('subelements', isset_ufw_applications, 'sources', {'skip_missing: True}) }}"
 
 - name: ensure outbound ufw app rules
   ufw:
     rule: allow
     app: "{{ target.0.name }}"
     to: "{{ target.1 }}"
-  loop: "{{ isset_ufw_applications | subelements('targets') | default([]) }}"
-  loop_control:
-    loop_var: target
-  when:
-    - target is iterable
-    - target.0 is mapping
-    - target.0 is defined
+  loop: "{{ lookup('subelements', isset_ufw_applications, 'targets', {'skip_missing: True}) }}"
 
 - name: ensure ufw rules
   ufw:
