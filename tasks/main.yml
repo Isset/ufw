@@ -10,18 +10,14 @@
     rule: allow
     app: "{{ item.0.name }}"
     src: "{{ item.1 }}"
-  with_subelements:
-    - "{{ isset_ufw_applications }}"
-    - sources
+  loop: "{{ isset_ufw_applications | subelements('sources') }}"
 
 - name: ensure outbound ufw app rules
   ufw:
     rule: allow
     app: "{{ item.0.name }}"
     to: "{{ item.1 }}"
-  with_subelements:
-    - "{{ isset_ufw_applications }}"
-    - targets
+  loop: "{{ isset_ufw_applications | subelements('targets') }}"
 
 - name: ensure ufw rules
   ufw:
