@@ -5,7 +5,7 @@
     dest: "/etc/ufw/applications.d/{{ item.name | lower }}"
   loop: "{{ isset_ufw_applications }}"
 
-- name: ensure ufw app rules
+- name: ensure inbound ufw app rules
   ufw:
     rule: allow
     app: "{{ item.0.name }}"
@@ -13,7 +13,15 @@
   with_subelements:
     - "{{ isset_ufw_applications }}"
     - sources
-# Notify 'ufw app reload app?'
+
+- name: ensure outbound ufw app rules
+  ufw:
+    rule: allow
+    app: "{{ item.0.name }}"
+    to: "{{ item.1 }}"
+  with_subelements:
+    - "{{ isset_ufw_applications }}"
+    - targets
 
 - name: ensure ufw rules
   ufw:
@@ -22,6 +30,20 @@
     app: "{{ item.app | default(omit) }}"
     src: "{{ item.src | default(omit) }}"
   loop: "{{ isset_ufw_rules }}"
+
+- name: ensure logging status
+  ufw:
+    log: "{{ isset_ufw_log }}"
+
+- name: ensure default inbound
+  ufw:
+    direction: incoming
+    policy: "{{ isset_ufw_inbound_default }}"
+
+- name: ensure default outbound
+  ufw:
+    direction: outgoing
+    policy: "{{ isset_ufw_outbound_default }}"
 
 - name: ensure firewall state
   ufw:

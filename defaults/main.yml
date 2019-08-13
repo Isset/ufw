@@ -3,3 +3,6 @@ isset_ufw_package_state: present
 isset_ufw_firewall_state: enabled
 isset_ufw_rules: []
 isset_ufw_applications: []
+isset_ufw_log: yes
+isset_ufw_inbound_default: deny
+isset_ufw_outbound_default: allow
