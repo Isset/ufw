@@ -16,7 +16,7 @@ Role Variables
     isset_ufw_rules:
       - rule: allow
         port: 8080
-        src: office.isset.net
+        src: example.com
     isset_ufw_applications:
       - name: Grafana
         title: Grafana
@@ -25,7 +25,7 @@ Role Variables
           - 3000/tcp
         sources:
           - 127.0.0.1
-          - "{{ lookup('dig', 'office.isset.net') }}"
+          - "{{ lookup('dig', 'example.com') }}"
           
 Dependencies
 ------------
